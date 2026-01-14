@@ -193,6 +193,12 @@ export const Sorter = ({ points, onComplete }: SorterProps) => {
                         dragDirection === 'EXPLAIN' && "shadow-[0_0_30px_rgba(16,185,129,0.5)] border-emerald-500",
                     )} />
                </div>
+
+               <div className="absolute -bottom-12 left-0 right-0 text-center opacity-30 pointer-events-none">
+                    <p className="text-[10px] uppercase tracking-widest text-slate-400">
+                        Swipe <span className="text-sky-400">Up</span> (Answer) • <span className="text-amber-400">Left</span> (Cite) • <span className="text-emerald-400">Right</span> (Explain)
+                    </p>
+               </div>
             </div>
 
             <div className="absolute bottom-8 text-xs text-slate-500 font-mono">
