@@ -33,17 +33,26 @@ export const Sorter = ({ points, onComplete }: SorterProps) => {
 
         const draggable = Draggable.create(cardRef.current, {
             type: "x,y",
-            edgeResistance: 0.65,
+            edgeResistance: 0.5,
             bounds: containerRef.current,
             inertia: true,
             onDrag: function() {
                 const x = this.x;
                 const y = this.y;
-                const threshold = 50;
+                const threshold = 60; // Reduced threshold for visual feedback
 
                 let dir: Category | null = null;
-                // Priority to UP if Y is significant
-                if (y < -threshold * 1.5) {
+
+                // Check collisions first (more intuitive)
+                if (answerRef.current && this.hitTest(answerRef.current, "10%")) {
+                    dir = 'ANSWER';
+                } else if (citeRef.current && this.hitTest(citeRef.current, "10%")) {
+                    dir = 'CITE';
+                } else if (explainRef.current && this.hitTest(explainRef.current, "10%")) {
+                    dir = 'EXPLAIN';
+                }
+                // Fallback to directional threshold
+                else if (y < -threshold * 1.5) {
                     dir = 'ANSWER';
                 } else if (x < -threshold) {
                     dir = 'CITE';
@@ -56,11 +65,20 @@ export const Sorter = ({ points, onComplete }: SorterProps) => {
             onDragEnd: function() {
                 const x = this.x;
                 const y = this.y;
-                const threshold = 100;
+                const threshold = 70; // Reduced threshold for action (was 100)
 
                 let chosenCategory: Category | null = null;
 
-                 if (y < -threshold * 1.5) {
+                // Check collisions first
+                if (answerRef.current && this.hitTest(answerRef.current, "20%")) {
+                    chosenCategory = 'ANSWER';
+                } else if (citeRef.current && this.hitTest(citeRef.current, "20%")) {
+                    chosenCategory = 'CITE';
+                } else if (explainRef.current && this.hitTest(explainRef.current, "20%")) {
+                    chosenCategory = 'EXPLAIN';
+                }
+                // Fallback to coordinate threshold
+                else if (y < -threshold * 1.5) {
                     chosenCategory = 'ANSWER';
                 } else if (x < -threshold) {
                     chosenCategory = 'CITE';
