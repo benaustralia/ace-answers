@@ -59,8 +59,8 @@ function App() {
             {phase === 'REVEAL' && <ParagraphOutput points={sortedPoints} onReset={handleReset} />}
         </main>
 
-        <footer className="fixed bottom-1 right-2 z-50 pointer-events-none opacity-30 mix-blend-difference">
-            <span className="text-[10px] font-mono text-slate-400">
+        <footer className="fixed bottom-2 right-2 z-[100] pointer-events-none opacity-50">
+            <span className="text-[10px] font-mono text-slate-500 bg-black/50 px-1 py-0.5 rounded">
                 build: {__COMMIT_HASH__}
             </span>
         </footer>
