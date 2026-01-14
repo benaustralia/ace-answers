@@ -58,6 +58,12 @@ function App() {
             {phase === 'SYNTHESIZE' && <Synthesizer points={sortedPoints} onComplete={handleSynthesizeComplete} />}
             {phase === 'REVEAL' && <ParagraphOutput points={sortedPoints} onReset={handleReset} />}
         </main>
+
+        <footer className="fixed bottom-1 right-2 z-50 pointer-events-none opacity-30 mix-blend-difference">
+            <span className="text-[10px] font-mono text-slate-400">
+                build: {__COMMIT_HASH__}
+            </span>
+        </footer>
     </div>
   )
 }
